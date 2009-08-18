@@ -1,0 +1,13 @@
+
+
+<build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-hudsonconfig-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <configuration>
+          <goalPrefix>generate</goalPrefix>
+        </configuration>
+      </plugin>
+    </plugins>
+</build>
