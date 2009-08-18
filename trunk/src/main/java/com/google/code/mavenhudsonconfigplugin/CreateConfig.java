@@ -14,12 +14,12 @@ import org.apache.maven.project.MavenProject;
 
 /**
  * 
- * mvn org.jens:maven-hudsonconfig-plugin:1.0-SNAPSHOT:generate
+ * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:generate
  * 
  * @author mac
  *
  * @goal generate
- * @phase process-sources
+ * @phase generate-sources
  * @requiresProject true
  */
 public class CreateConfig extends AbstractMojo{
@@ -107,7 +107,6 @@ public class CreateConfig extends AbstractMojo{
     protected String parseSvnName(String value) {
         String testValue = value;
         String[] splitted = testValue.split("/");
-        System.out.println(splitted[splitted.length-1]);
         String find = splitted[splitted.length-1];
         if (find.toLowerCase().equals("trunk")) {
             find = splitted[splitted.length-2];
@@ -161,7 +160,11 @@ public class CreateConfig extends AbstractMojo{
                 }
             }
             
-        
+     
+            getLog().info(MYNAME+": New config succesfull written to target/config.xml");
+            getLog().info(MYNAME+": ");
+            getLog().info(MYNAME+": Copy it to hudson");
+            
     }
 
     

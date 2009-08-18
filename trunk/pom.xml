@@ -13,6 +13,11 @@
         This plugin pushes the information from the pom to Hudson.
         Currently only the config is written into target/config.xml
     </description>
+    
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://www.jens.org:8080/hudson/</url>
+    </ciManagement>
 
     <developers>
         <developer>
@@ -75,5 +80,15 @@
             <artifactId>maven-project</artifactId>
             <version>2.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+            <dependency>
+        <groupId>org.jdom</groupId>
+        <artifactId>jdom</artifactId>
+        <version>1.1</version>
+    </dependency>
     </dependencies>
 </project>
