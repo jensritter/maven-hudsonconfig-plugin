@@ -1,8 +1,10 @@
 package com.google.code.mavenhudsonconfigplugin;
 
+import com.google.code.mavenhudsonconfigplugin.GenerateConfig;
+
 import junit.framework.TestCase;
 
-public class CreateConfigTest extends TestCase {
+public class GenerateConfigTest extends TestCase {
     
     public void testPattern() {
 
