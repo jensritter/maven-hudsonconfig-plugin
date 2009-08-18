@@ -4,6 +4,8 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
+import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
+
 public abstract class BaseJob extends AbstractMojo {
     
 private static final String MYNAME="Hudsonconfig";
@@ -22,10 +24,15 @@ private static final String MYNAME="Hudsonconfig";
      */
     protected String hudsonUrl;
     
-    protected String name;
+    /**
+     * Manual set the jobname for Hudson
+     * 
+     * @parameter
+     */
+    protected String jobName;
 
     
-    protected void defaultValues() throws MojoExecutionException {
+    protected void defaultValues(HudsonConfig cfg) throws MojoExecutionException {
         if (project == null) {
             throw new MojoExecutionException("No ProjectSettings from Plexus");
         }
@@ -33,7 +40,7 @@ private static final String MYNAME="Hudsonconfig";
         
         getLog().debug("hudsonUrl");
         getLog().debug(hudsonUrl);
-        String origUrl = hudsonUrl;
+
         if (hudsonUrl == null) {
             getLog().debug("No paramenter hudsonUrl - searching in ciManagement");
             if (project.getCiManagement() == null) {
@@ -50,15 +57,15 @@ private static final String MYNAME="Hudsonconfig";
             getLog().debug("guessed URL : " + hudsonUrl);
             
             if (hudsonUrl.contains("/job/")) {
-                name = hudsonUrl.substring(hudsonUrl.indexOf("/job/")+5,hudsonUrl.length());
+                jobName = hudsonUrl.substring(hudsonUrl.indexOf("/job/")+5,hudsonUrl.length());
                 hudsonUrl = hudsonUrl.substring(0,hudsonUrl.indexOf("/job/"));
                 getLog().debug("removed JOB part from url");
             }
             
-            if (name == null) {
+            if (jobName == null) {
                 getLog().debug("guessing name from artifactId");
                 getLog().info("Guessing JobName from artifactId. To disable this enter the full URL in ciManagement to this job");
-                name = project.getArtifactId();
+                jobName = project.getArtifactId();
             }
         }
     }

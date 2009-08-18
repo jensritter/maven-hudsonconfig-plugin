@@ -22,8 +22,8 @@ public class RunJob extends BaseJob{
         defaultValues();
         HudsonControl hudson = new HudsonControl(hudsonUrl);
         try {
-            hudson.runJob(name);
-            getLog().info("stared job '" + name + "' on " + hudsonUrl);
+            hudson.runJob(jobName);
+            getLog().info("stared job '" + jobName + "' on " + hudsonUrl);
         } catch (IOException e) {
             throw new MojoExecutionException("Error while connection to Hudson");
         }

@@ -55,16 +55,29 @@ public class GenerateConfig extends BaseJob {
      * @parameter
      */
     protected File templateFile;
+    
+    /**
+     * Setting default "goals" for Hudsonbuild
+     * 
+     * @parameter
+     */
+    protected String goals;
 
     @Override
-    protected void defaultValues() throws MojoExecutionException {
-        super.defaultValues();
+    protected void defaultValues(HudsonConfig cfg) throws MojoExecutionException {
         getLog().debug("keepBuildDays : ");
-        if (keepBuildsNum == null) {
-            getLog().debug("NULL");
-            keepBuildsNum = new Integer(20);
-            getLog().debug("Setting to : " + keepBuildsNum.toString());
-        }
+//        if (correctedKeepBuildsNum == null) {
+//            correctedKeepBuildsNum = keepBuildsNum;
+//            
+//            if (keepBuildsNum == null) {
+//                getLog().debug("NULL");
+//
+//                correctedKeepBuildsNum = new Integer(20);
+//                getLog().debug("Setting to : " + keepBuildsNum.toString());
+//            }
+//        }
+//        getLog().debug("" + correctedKeepBuildsNum);
+        
 
         getLog().debug("SVN");
         if (project.getScm() != null && project.getScm().getDeveloperConnection() != null) {
@@ -98,6 +111,17 @@ public class GenerateConfig extends BaseJob {
         } else {
             correctedDescription = project.getDescription();
         }
+        
+//        getLog().debug("goals"); 
+//        getLog().debug(correctedGoals);
+//        if (correctedGoals == null) {
+//            if (goals == null) { 
+//                getLog().debug("Setting default to 'clean install deploy site site:deploy'");
+//                goals = "clean install deploy site site:deploy";
+//            }
+//            correctedGoals = goals;
+//        }
+//        getLog().debug(correctedGoals);
     }
 
     protected String parseSvnName(String value) {
@@ -117,7 +141,7 @@ public class GenerateConfig extends BaseJob {
 
     
     public void execute() throws MojoExecutionException, MojoFailureException {
-        defaultValues();
+        defaultValues(null);
         
         buildConfig(null);
 
@@ -150,13 +174,13 @@ public class GenerateConfig extends BaseJob {
         
         
         cfg.setDescription(correctedDescription);
-        cfg.setLogRotatorNumToKeep(keepBuildsNum);
+        cfg.setLogRotatorNumToKeep(correctedKeepBuildsNum);
         if (cfg.getSvnLocations() != 1) {
             throw new MojoExecutionException("No or more than one scm in the HUDSON config present. don't known what to do");
         }
         cfg.setSvnRemote(0, correctedSVN);
         cfg.setSvnLocal(0, localpart);
-        
+        cfg.setGoals(correctedGoals);
         
         
 
