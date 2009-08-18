@@ -1,4 +1,4 @@
-package org.jens;
+package com.google.code.mavenhudsonconfigplugin;
 
 import java.io.File;
 import java.io.FileInputStream;

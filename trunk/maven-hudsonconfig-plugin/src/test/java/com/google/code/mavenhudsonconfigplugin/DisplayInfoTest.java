@@ -1,4 +1,6 @@
-package org.jens;
+package com.google.code.mavenhudsonconfigplugin;
+
+import com.google.code.mavenhudsonconfigplugin.DisplayInfo;
 
 import junit.framework.TestCase;
 
