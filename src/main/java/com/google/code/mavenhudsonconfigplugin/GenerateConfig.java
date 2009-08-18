@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.project.MavenProject;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
@@ -27,26 +26,20 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
 public class GenerateConfig extends BaseJob {
 
     private static final String MYNAME = "Hudsonconfig";
-    /**
-     * @parameter expression="${project}"
-     * @required
-     * @readonly
-     */
-    MavenProject project;
-
+    
     /**
      * Max day to keep all.
      * 
      * @parameter
      */
-    private Integer keepBuildsNum;
+    protected Integer keepBuildsNum;
 
     /**
      * Localdir for the SVN checkout
      * 
      * @parameter
      */
-    private String localpart;
+    protected String localpart;
 
     /**
      * Location of the file.
@@ -54,17 +47,18 @@ public class GenerateConfig extends BaseJob {
      * @parameter expression="${project.build.directory}"
      * @required
      */
-    private File outputDirectory;
+    protected File outputDirectory;
 
     /**
      * Location of template ( if not set - MY default will be used )
      * 
      * @parameter
      */
-    private File templateFile;
+    protected File templateFile;
 
     @Override
     protected void defaultValues() throws MojoExecutionException {
+        super.defaultValues();
         getLog().debug("keepBuildDays : ");
         if (keepBuildsNum == null) {
             getLog().debug("NULL");
