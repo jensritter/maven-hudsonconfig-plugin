@@ -21,9 +21,12 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  */
 public class UpdateConfig extends GenerateConfig{
 
+    
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        getLog().info(hudsonUrl);
         defaultValues();
+        getLog().info(hudsonUrl);
         HudsonControl ctl = new HudsonControl(hudsonUrl);
         try {
             HudsonConfig cfg = ctl.getConfig(name);

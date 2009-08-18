@@ -13,7 +13,7 @@ private static final String MYNAME="Hudsonconfig";
      * @required
      * @readonly
      */
-    MavenProject project;
+    protected MavenProject project;
     
     /**
      * URL to Hudson.
@@ -26,6 +26,9 @@ private static final String MYNAME="Hudsonconfig";
 
     
     protected void defaultValues() throws MojoExecutionException {
+        if (project == null) {
+            throw new MojoExecutionException("No ProjectSettings from Plexus");
+        }
         getLog().debug("updating values");
         
         getLog().debug("hudsonUrl");
