@@ -11,7 +11,7 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  * 
  * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:run
  * 
- * @author mac
+ * @author Jens Ritter<jens.ritter@gmail.com>
  *
  * @goal run
  * @requiresProject true

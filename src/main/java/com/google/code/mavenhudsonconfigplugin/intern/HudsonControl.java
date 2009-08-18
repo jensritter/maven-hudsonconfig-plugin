@@ -118,6 +118,26 @@ public class HudsonControl {
         }
     }
     
+    private Document getHttpGet(String value) throws IOException, JDOMException {
+        GetMethod method = new GetMethod(url + "/"  + value);
+        try {
+            // Execute the method.
+            int statusCode = client.executeMethod(method);
+            if (statusCode != HttpStatus.SC_OK) {
+                logger.fatal("Method failed: " + method.getStatusLine());
+                throw new HttpException(method.getStatusLine().toString());
+              }
+         // Read the response body.
+            InputStream in = method.getResponseBodyAsStream();
+            Document document = sax.build(in);
+            
+            in.close();
+            return document;
+        } finally {
+            method.releaseConnection();
+        }
+    }
+    
     private String postHttpPlain(String value) throws IOException {
         PostMethod method = new PostMethod(url + "/"  + value);
         try {
@@ -138,17 +158,6 @@ public class HudsonControl {
             method.releaseConnection();
         }
     }
-
-    
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
-    }
-
-
 
     private HudsonJob xml2HudsonJob(Element jobXml) {
         HudsonJob job = new HudsonJob();
@@ -213,7 +222,7 @@ public class HudsonControl {
         return null;
     }
 
-    public String getConfig(String projectname) throws IOException {
+    public String getConfigAsXml(String projectname) throws IOException {
         return getHttpGetPlain("job/" + projectname + "/config.xml");
     }
     
@@ -250,12 +259,24 @@ public class HudsonControl {
     
     public void disableJob(String projectname) throws IOException {
         // http://www.jens.org:8080/hudson/job/MasterPom-1.0/disable
-        postHttpPlain("/job/" + projectname + "/disable");
+        postHttpPlain("job/" + projectname + "/disable");
     }
     
     public void enableJob(String projectname) throws IOException {
         // http://www.jens.org:8080/hudson/job/MasterPom-1.0/enable
-        postHttpPlain("/job/" + projectname + "/enable");
+        postHttpPlain("job/" + projectname + "/enable");
+    }
+
+    public HudsonConfig getConfig(String projectname) throws HttpException, IOException, JDOMException {
+        Document cfg = getHttpGet("job/" + projectname + "/config.xml");
+        HudsonConfig config = HudsonConfig.parseDocument(cfg);
+        return config;
+    }
+
+    public void saveConfig(String name, String xml) throws HttpException, IOException {
+        // http://www.jens.org:8080/hudson/job/Bugs/config.xml
+        postHttp("job/" + name + "/config.xml", null, xml);
+        
     }
 
 }
