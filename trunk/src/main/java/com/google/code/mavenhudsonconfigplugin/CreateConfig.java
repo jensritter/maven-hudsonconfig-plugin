@@ -22,7 +22,7 @@ import org.apache.maven.project.MavenProject;
  * @phase process-sources
  * @requiresProject true
  */
-public class DisplayInfo extends AbstractMojo{
+public class CreateConfig extends AbstractMojo{
     
     private static final String MYNAME="Hudsonconfig";
     /**
