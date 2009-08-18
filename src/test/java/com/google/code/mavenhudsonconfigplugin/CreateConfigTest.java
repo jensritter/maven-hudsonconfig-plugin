@@ -1,10 +1,10 @@
 package com.google.code.mavenhudsonconfigplugin;
 
-import com.google.code.mavenhudsonconfigplugin.DisplayInfo;
+import com.google.code.mavenhudsonconfigplugin.CreateConfig;
 
 import junit.framework.TestCase;
 
-public class DisplayInfoTest extends TestCase {
+public class CreateConfigTest extends TestCase {
     
     public void testPattern() {
 
@@ -17,7 +17,7 @@ public class DisplayInfoTest extends TestCase {
     }
 
 
-    DisplayInfo info = new DisplayInfo();
+    CreateConfig info = new CreateConfig();
 
     
     private void okThis(String path) {
