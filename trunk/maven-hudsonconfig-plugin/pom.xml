@@ -1,47 +1,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.jens</groupId>
-  <artifactId>maven-hudsonconfig-plugin</artifactId>
-  <packaging>maven-plugin</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>maven-hudsonconfig-plugin Maven Mojo</name>
-  <url>http://maven.apache.org</url>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.google.code</groupId>
+    <artifactId>maven-hudsonconfig-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>maven-hudsonconfig-plugin</name>
+    <url>http://code.google.com/p/maven-hudsonconfig-plugin/</url>
+    <description>
+        Hudson currently don't read informations from a maven pom.xml file. 
+        This plugin pushes the information from the pom to Hudson.
+        Currently only the config is written into target/config.xml
+    </description>
 
+    <developers>
+        <developer>
+            <name>Jens Ritter</name>
+            <email>jens.ritter@gmail.com</email>
+            <roles>
+                <role>singleDeveloper</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <inceptionYear>2009</inceptionYear>
+    <issueManagement>
+        <system>googlecode</system>
+        <url>http://code.google.com/p/maven-hudsonconfig-plugin/issues/list</url>
+    </issueManagement>
     <scm>
-        <developerConnection>scm:svn:http://svn.jens.homeunix.net/java/${project.artifactId}/trunk/</developerConnection>
+        <connection>scm:svn:http://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://code.google.com/p/maven-hudsonconfig-plugin/source/browse/</url>
     </scm>
-    
-    <description>test</description>
-  <build>
-  <!-- 
-    <plugins>
-      <plugin>
-        <artifactId>maven-hudsonconfig-plugin</artifactId>
-        <version>1.0-SNAPSHOT</version>
-        <configuration>
-          <goalPrefix>generate</goalPrefix>
-        </configuration>
-      </plugin>
-    </plugins>
-    -->
-</build>
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>org.apache.maven</groupId>
-    	<artifactId>maven-project</artifactId>
-    	<version>2.2.0</version>
-    </dependency>
-  </dependencies>
+
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-project</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+    </dependencies>
 </project>
