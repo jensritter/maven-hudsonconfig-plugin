@@ -13,12 +13,12 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  * 
  * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:list
  * 
- * @author Jens Ritter<jens.ritter@gmail.com>
+ * @author Jens Ritter -jens.ritter.gmail.com-
  *
  * @goal list
  * @requiresProject true
  */
-public class ListJobs extends BaseJob{
+public class ListJobs extends AbstractBaseJob{
     
     public void execute() throws MojoExecutionException, MojoFailureException {
         defaultValues(null);

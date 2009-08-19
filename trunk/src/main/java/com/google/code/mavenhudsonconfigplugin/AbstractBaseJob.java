@@ -5,12 +5,23 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
 import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
-
-public abstract class BaseJob extends AbstractMojo {
+/**
+ * 
+ * Baseclass for all MavenGoals.
+ * 
+ * @author Jens Ritter -jens.ritter.gmail.com-
+ *
+ */
+public abstract class AbstractBaseJob extends AbstractMojo {
     
+    /**
+     * Constant for logging.
+     */
     public static final String MYNAME="Hudsonconfig";
     
     /**
+     * Plexus-Injector for mavenproject.
+     * 
      * @parameter expression="${project}"
      * @required
      * @readonly
@@ -62,8 +73,8 @@ public abstract class BaseJob extends AbstractMojo {
             }
             getLog().debug("guessed URL : " + hudsonUrl_used);
             if (hudsonUrl_used.contains("/job/")) {
-                tmpName = hudsonUrl.substring(hudsonUrl.indexOf("/job/")+5,hudsonUrl.length());
-                hudsonUrl_used = hudsonUrl.substring(0,hudsonUrl.indexOf("/job/"));
+                tmpName = hudsonUrl_used.substring(hudsonUrl_used.indexOf("/job/")+5,hudsonUrl_used.length());
+                hudsonUrl_used = hudsonUrl_used.substring(0,hudsonUrl_used.indexOf("/job/"));
                 getLog().debug("removed JOB part from url : " + hudsonUrl_used);
             }
         } else {

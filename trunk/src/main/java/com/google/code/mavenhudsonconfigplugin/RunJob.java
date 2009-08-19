@@ -11,12 +11,12 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  * 
  * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:run
  * 
- * @author Jens Ritter<jens.ritter@gmail.com>
+ * @author Jens Ritter -jens.ritter.gmail.com-
  *
  * @goal run
  * @requiresProject true
  */
-public class RunJob extends BaseJob{
+public class RunJob extends AbstractBaseJob{
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         defaultValues(null);

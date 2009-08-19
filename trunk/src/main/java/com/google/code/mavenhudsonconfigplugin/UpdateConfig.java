@@ -14,7 +14,7 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  * 
  * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:update
  * 
- * @author Jens Ritter<jens.ritter@gmail.com>
+ * @author Jens Ritter -jens.ritter.gmail.com-
  * 
  * @goal update
  * @requiresProject true
