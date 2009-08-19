@@ -17,13 +17,13 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
  * 
  * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:generate
  * 
- * @author Jens Ritter<jens.ritter@gmail.com>
+ * @author Jens Ritter -jens.ritter.gmail.com-
  * 
  * @goal generate
  * @phase generate-sources
  * @requiresProject true
  */
-public class GenerateConfig extends BaseJob {
+public class GenerateConfig extends AbstractBaseJob {
 
     /**
      * Max day to keep all.
@@ -178,7 +178,6 @@ public class GenerateConfig extends BaseJob {
     
     public void execute() throws MojoExecutionException, MojoFailureException {
         defaultValues(null);
-        
         buildConfig(null);
 
 
@@ -189,14 +188,14 @@ public class GenerateConfig extends BaseJob {
     
     
     
-    public String buildConfig(HudsonConfig cfg) throws MojoExecutionException {
-       
-        if (cfg != null) {
+    public String buildConfig(final HudsonConfig value) throws MojoExecutionException {
+        HudsonConfig cfg = value;
+        if (cfg == null) {
             SAXBuilder builder = new SAXBuilder();
             Document doc = null;
             try {
                 if (templateFile == null) {
-                    doc = builder.build(getClass().getResourceAsStream("/config.xml"));
+                    doc = builder.build(GenerateConfig.class.getResourceAsStream("/config.xml"));
                 } else {
                     doc = builder.build(new FileInputStream(templateFile));
                 }
@@ -223,7 +222,9 @@ public class GenerateConfig extends BaseJob {
 
         File f = outputDirectory;
         if (!f.exists()) {
-            f.mkdirs();
+            if (!f.mkdirs()) {
+                throw new MojoExecutionException("Can't create directory " + f.toString());
+            }
         }
         File conf = new File(f, "config.xml");
         FileWriter w = null;
@@ -238,7 +239,7 @@ public class GenerateConfig extends BaseJob {
                 try {
                     w.close();
                 } catch (IOException e) {
-                    // ignore
+                    getLog().warn("Error while closing Resource FileWriter " + e.getMessage());
                 }
             }
         }
