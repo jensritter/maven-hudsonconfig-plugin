@@ -8,7 +8,7 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
 
 public abstract class BaseJob extends AbstractMojo {
     
-private static final String MYNAME="Hudsonconfig";
+    public static final String MYNAME="Hudsonconfig";
     
     /**
      * @parameter expression="${project}"
@@ -17,22 +17,27 @@ private static final String MYNAME="Hudsonconfig";
      */
     protected MavenProject project;
     
+    
     /**
      * URL to Hudson.
+     * 
+     * if this is not set, the values in ciManagement are tried.
      *
      * @parameter
      */
-    protected String hudsonUrl;
+    private String hudsonUrl;
+    protected String hudsonUrl_used;
     
     /**
-     * Manual set the jobname for Hudson
+     * Manual set the jobname for Hudson.
      * 
      * @parameter
      */
-    protected String jobName;
-
+    private String jobName;
+    protected String jobName_used;
     
     protected void defaultValues(HudsonConfig cfg) throws MojoExecutionException {
+        getLog().debug("BaseJob.defaultValues:");
         if (project == null) {
             throw new MojoExecutionException("No ProjectSettings from Plexus");
         }
@@ -41,6 +46,7 @@ private static final String MYNAME="Hudsonconfig";
         getLog().debug("hudsonUrl");
         getLog().debug(hudsonUrl);
 
+        String tmpName = "";
         if (hudsonUrl == null) {
             getLog().debug("No paramenter hudsonUrl - searching in ciManagement");
             if (project.getCiManagement() == null) {
@@ -50,24 +56,44 @@ private static final String MYNAME="Hudsonconfig";
             if (!systm.toLowerCase().trim().equals("hudson")) {
                 throw new MojoExecutionException(MYNAME+": only Hudson is currently supported. '" + project.getCiManagement().getSystem()+"' is not.");
             }
-            hudsonUrl = project.getCiManagement().getUrl();
-            if (hudsonUrl == null || hudsonUrl.equals("")) {
+            hudsonUrl_used = project.getCiManagement().getUrl();
+            if (hudsonUrl_used == null || hudsonUrl_used.equals("")) {
                 throw new MojoExecutionException("url for ciManagement is empty");
             }
-            getLog().debug("guessed URL : " + hudsonUrl);
-            
-            if (hudsonUrl.contains("/job/")) {
-                jobName = hudsonUrl.substring(hudsonUrl.indexOf("/job/")+5,hudsonUrl.length());
-                hudsonUrl = hudsonUrl.substring(0,hudsonUrl.indexOf("/job/"));
-                getLog().debug("removed JOB part from url");
+            getLog().debug("guessed URL : " + hudsonUrl_used);
+            if (hudsonUrl_used.contains("/job/")) {
+                tmpName = hudsonUrl.substring(hudsonUrl.indexOf("/job/")+5,hudsonUrl.length());
+                hudsonUrl_used = hudsonUrl.substring(0,hudsonUrl.indexOf("/job/"));
+                getLog().debug("removed JOB part from url : " + hudsonUrl_used);
             }
-            
-            if (jobName == null) {
-                getLog().debug("guessing name from artifactId");
-                getLog().info("Guessing JobName from artifactId. To disable this enter the full URL in ciManagement to this job");
-                jobName = project.getArtifactId();
-            }
+        } else {
+            hudsonUrl_used = hudsonUrl;
         }
+        getLog().debug("jobname");
+        getLog().debug(jobName);
+        if (jobName == null) {
+            // jobName can be comming from the origHudsonConfig.
+            if (cfg != null && cfg.getJobName() != null) {
+                jobName_used = cfg.getJobName();
+                getLog().debug("using jobname from orig-HudsonConfig : " + cfg.getJobName());
+            } else {
+                if (!tmpName.equals("")) {
+                    jobName_used = tmpName;
+                    getLog().debug("taking jobname from ciManagement-url :" + jobName_used);
+                } else {
+                    getLog().debug("guessing name from artifactId");
+                    getLog().info("Guessing JobName from artifactId. To disable this guessing, enter the full URL in ciManagement to this job - or use the plugin-parameter 'jobName'");
+                    jobName_used = project.getArtifactId();
+                }
+            }
+        } else {
+            jobName_used = jobName;
+        }
+        
+        getLog().debug("Using Jobname : ");
+        getLog().debug(jobName_used);
+         
+        
     }
 
 }

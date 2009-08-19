@@ -269,7 +269,7 @@ public class HudsonControl {
 
     public HudsonConfig getConfig(String projectname) throws HttpException, IOException, JDOMException {
         Document cfg = getHttpGet("job/" + projectname + "/config.xml");
-        HudsonConfig config = HudsonConfig.parseDocument(cfg);
+        HudsonConfig config = HudsonConfig.parseDocument(projectname,cfg);
         return config;
     }
 

@@ -25,21 +25,26 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
  */
 public class GenerateConfig extends BaseJob {
 
-    private static final String MYNAME = "Hudsonconfig";
-    
     /**
      * Max day to keep all.
      * 
-     * @parameter
-     */
-    protected Integer keepBuildsNum;
-
-    /**
-     * Localdir for the SVN checkout
+     * If there is a plugin setting, it will always override existend hudson-values.
      * 
      * @parameter
      */
-    protected String localpart;
+    private Integer keepBuildsNum;
+    protected Integer keepBuildsNum_used;
+    
+
+    /**
+     * Localdir for the SVN checkout.
+     * 
+     * only used for creating new configs.
+     * 
+     * @parameter
+     */
+    private String localpart;
+    protected String localpart_used;
 
     /**
      * Location of the file.
@@ -47,81 +52,114 @@ public class GenerateConfig extends BaseJob {
      * @parameter expression="${project.build.directory}"
      * @required
      */
-    protected File outputDirectory;
+    private File outputDirectory;
+    protected File outputDirectory_used;
 
     /**
      * Location of template ( if not set - MY default will be used )
      * 
      * @parameter
      */
-    protected File templateFile;
+    private File templateFile;
+    protected File templateFile_used;
     
     /**
      * Setting default "goals" for Hudsonbuild
      * 
      * @parameter
      */
-    protected String goals;
+    private String goals;
+    protected String goals_used;
+    
+    protected String svnPath_used;
+    protected String description_used;
+
 
     @Override
     protected void defaultValues(HudsonConfig cfg) throws MojoExecutionException {
+        getLog().debug("BaseGenerateConfig.defaultValues:");
+        
         getLog().debug("keepBuildDays : ");
-//        if (correctedKeepBuildsNum == null) {
-//            correctedKeepBuildsNum = keepBuildsNum;
-//            
-//            if (keepBuildsNum == null) {
-//                getLog().debug("NULL");
-//
-//                correctedKeepBuildsNum = new Integer(20);
-//                getLog().debug("Setting to : " + keepBuildsNum.toString());
-//            }
-//        }
-//        getLog().debug("" + correctedKeepBuildsNum);
+        if (keepBuildsNum != null) {
+            getLog().debug(keepBuildsNum.toString());
+        } else {
+            getLog().debug("NULL");
+        }
+        
+        if (keepBuildsNum == null) {
+            getLog().debug("No config in pom. Looking in Hudson...");
+            if (cfg != null) {
+                keepBuildsNum_used = cfg.getLogRotatorNumToKeep();
+                
+            }
+            if (keepBuildsNum_used == null) {
+                getLog().debug("No config in Hudson - using default : 20");
+                keepBuildsNum_used=20;
+            }
+        } else {
+            keepBuildsNum_used = keepBuildsNum;
+        }
         
 
         getLog().debug("SVN");
         if (project.getScm() != null && project.getScm().getDeveloperConnection() != null) {
-            correctedSVN = project.getScm().getDeveloperConnection();
-            getLog().debug(correctedSVN);
+            svnPath_used = project.getScm().getDeveloperConnection();
+            getLog().debug(svnPath_used);
             // format
             // scm:<scm_provider><delimiter><provider_specific_part>
-            if (!correctedSVN.startsWith("scm:svn:")) {
+            if (!svnPath_used.startsWith("scm:svn:")) {
                 throw new MojoExecutionException(MYNAME + ": Currently only Subversion is supported"); // lazy - but it
                                                                                                        // works for me
                                                                                                        // ;)
             }
-            correctedSVN = correctedSVN.substring(8, correctedSVN.length());
-            getLog().debug("Transformed to : " + correctedSVN);
+            svnPath_used = svnPath_used.substring(8, svnPath_used.length());
+            getLog().debug("Transformed to : " + svnPath_used);
         } else {
             throw new MojoExecutionException(MYNAME + ": There is no <scm><developerConnection> in your project-pom");
         }
 
         getLog().debug("SVN-Localpart");
         getLog().debug(localpart);
-        if (localpart == null || localpart.equals("")) {
-            // guessing the localpart.
-            localpart = parseSvnName(correctedSVN);
-            getLog().debug("Guessing localpart : " + localpart);
+        if (cfg != null) {
+            if (cfg.getSvnLocations() != 1) {
+                getLog().debug("Remote HudsonConfig does not have a svn-local-part");
+            } else {
+                localpart_used = cfg.getSvnLocal(0);
+            }
+        } else {
+            if (localpart == null || localpart.equals("")) {
+                // guessing the localpart.
+                localpart_used = parseSvnName(svnPath_used);
+                getLog().debug("Guessing localpart from scm-path: " + localpart);
+            }
         }
+        
 
         getLog().debug("DESCRIPTION");
         getLog().debug(project.getDescription());
         if (project.getDescription() == null) {
-            correctedDescription = "";
+            description_used = "";
         } else {
-            correctedDescription = project.getDescription();
+            description_used = project.getDescription();
+            // never use the hudson-description !!
         }
         
-//        getLog().debug("goals"); 
-//        getLog().debug(correctedGoals);
-//        if (correctedGoals == null) {
-//            if (goals == null) { 
-//                getLog().debug("Setting default to 'clean install deploy site site:deploy'");
-//                goals = "clean install deploy site site:deploy";
-//            }
-//            correctedGoals = goals;
-//        }
-//        getLog().debug(correctedGoals);
+        getLog().debug("goals"); 
+        getLog().debug(goals);
+        // order : currentHudsonConfig, pluginConfig, Default 
+        if (cfg != null) {
+            getLog().debug("getting GOALS from Hudson : ");
+            getLog().debug(cfg.getGoals());
+            
+            goals_used = cfg.getGoals();
+        }
+        if (goals_used == null) {
+            goals_used = goals;
+            if (goals_used == null) {
+                getLog().debug("Setting default to 'clean install deploy site site:deploy'");
+                goals_used = "clean install deploy site site:deploy";
+            }
+        }
     }
 
     protected String parseSvnName(String value) {
@@ -134,8 +172,6 @@ public class GenerateConfig extends BaseJob {
         return find;
     }
 
-    private String correctedSVN;
-    private String correctedDescription;
 
 
 
@@ -169,18 +205,19 @@ public class GenerateConfig extends BaseJob {
             } catch (JDOMException e) {
                 throw new MojoExecutionException(MYNAME + ": can't read template: " + e.getMessage());
             }
-            cfg = HudsonConfig.parseDocument(doc);
+            cfg = HudsonConfig.parseDocument(jobName_used,doc);
         }
         
+        // MAPPING:
         
-        cfg.setDescription(correctedDescription);
-        cfg.setLogRotatorNumToKeep(correctedKeepBuildsNum);
+        cfg.setDescription(description_used);
+        cfg.setLogRotatorNumToKeep(keepBuildsNum_used);
         if (cfg.getSvnLocations() != 1) {
             throw new MojoExecutionException("No or more than one scm in the HUDSON config present. don't known what to do");
         }
-        cfg.setSvnRemote(0, correctedSVN);
-        cfg.setSvnLocal(0, localpart);
-        cfg.setGoals(correctedGoals);
+        cfg.setSvnRemote(0, svnPath_used);
+        cfg.setSvnLocal(0, localpart_used);
+        cfg.setGoals(goals_used);
         
         
 

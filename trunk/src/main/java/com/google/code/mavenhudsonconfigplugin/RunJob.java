@@ -19,11 +19,11 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
 public class RunJob extends BaseJob{
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        defaultValues();
-        HudsonControl hudson = new HudsonControl(hudsonUrl);
+        defaultValues(null);
+        HudsonControl hudson = new HudsonControl(hudsonUrl_used);
         try {
-            hudson.runJob(jobName);
-            getLog().info("stared job '" + jobName + "' on " + hudsonUrl);
+            hudson.runJob(jobName_used);
+            getLog().info("stared job '" + jobName_used + "' on " + hudsonUrl_used);
         } catch (IOException e) {
             throw new MojoExecutionException("Error while connection to Hudson");
         }

@@ -21,9 +21,9 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
 public class ListJobs extends BaseJob{
     
     public void execute() throws MojoExecutionException, MojoFailureException {
-        defaultValues();
-        HudsonControl hudson = new HudsonControl(hudsonUrl);
-        getLog().info("Jobs on " + hudsonUrl);
+        defaultValues(null);
+        HudsonControl hudson = new HudsonControl(hudsonUrl_used);
+        getLog().info("Jobs on " + hudsonUrl_used);
         try {
             for(String it : hudson.getjobsAsString()) {
                 getLog().info(it);

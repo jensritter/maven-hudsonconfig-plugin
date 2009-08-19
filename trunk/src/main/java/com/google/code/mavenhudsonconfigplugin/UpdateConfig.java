@@ -24,29 +24,27 @@ public class UpdateConfig extends GenerateConfig{
     
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        defaultValues();
+        defaultValues(null);
         
-        HudsonControl ctl = new HudsonControl(hudsonUrl);
+        HudsonControl ctl = new HudsonControl(hudsonUrl_used);
+       
         try {
-            HudsonConfig cfg = ctl.getConfig(jobName);
-            this.correctedGoals = cfg.getGoals();
-            this.correctedKeepBuildsNum= cfg.getLogRotatorNumToKeep();
-            
-            defaultValues();
+            HudsonConfig cfg = ctl.getConfig(jobName_used);
+            defaultValues(cfg);
             
             
             String content = buildConfig(cfg);
-            ctl.saveConfig(jobName, content);
+            ctl.saveConfig(jobName_used, content);
             getLog().info("Hudson config Updated");
         } catch (HttpException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new MojoExecutionException(e.getMessage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new MojoExecutionException(e.getMessage());
         } catch (JDOMException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            throw new MojoExecutionException(e.getMessage());
         }
     }
 
