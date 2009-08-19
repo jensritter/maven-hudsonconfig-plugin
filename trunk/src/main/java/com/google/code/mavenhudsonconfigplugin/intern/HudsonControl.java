@@ -132,15 +132,15 @@ public class HudsonControl {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     private void postHttp(String value, Map<String,String> param, String content) throws HttpException, IOException {
-        String query = "";
+        StringBuilder query = new StringBuilder();
         if (param != null) {
-            query = "?";
+            query.append("?");
             for(Map.Entry<String, String> ent : param.entrySet()) {
-                query += ent.getKey() + "=" + ent.getValue() + "&";
+                query.append(ent.getKey()).append("=").append(ent.getValue()).append("&");
             }
-            query = query.substring(0,query.length()-1);
+            query.deleteCharAt(query.length()-1);
         }
-        PostMethod method = new PostMethod(url + "/"  + value + query);
+        PostMethod method = new PostMethod(url + "/"  + value + query.toString());
         if (content != null) {
             StringRequestEntity att = new StringRequestEntity(content,"text/xml",null);
             method.setRequestEntity(att);
@@ -229,7 +229,8 @@ public class HudsonControl {
             // Execute the method.
             int statusCode = client.executeMethod(method);
             if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
-                logger.debug(method.getStatusLine());
+                logger.debug("SC_MOVED_TEMPORARILY ignored");
+                // all
             } else {
                 if (statusCode != HttpStatus.SC_OK) {
                     logger.fatal("Method failed: " + method.getStatusLine());

@@ -11,7 +11,7 @@ import org.jdom.output.XMLOutputter;
 /**
  * The Class HudsonConfig.
  * 
- * @author Jens Ritter -jens.ritter.gmail.com-
+ * @author Jens Ritter
  */
 public final class HudsonConfig {
 
@@ -28,6 +28,7 @@ public final class HudsonConfig {
      * Instantiates a new hudson config.
      */
     private HudsonConfig() {
+
     }
 
     /**

@@ -55,7 +55,6 @@ public abstract class AbstractBaseJob extends AbstractMojo {
         getLog().debug("updating values");
         
         getLog().debug("hudsonUrl");
-        getLog().debug(hudsonUrl);
 
         String tmpName = "";
         if (hudsonUrl == null) {
@@ -81,7 +80,7 @@ public abstract class AbstractBaseJob extends AbstractMojo {
             hudsonUrl_used = hudsonUrl;
         }
         getLog().debug("jobname");
-        getLog().debug(jobName);
+
         if (jobName == null) {
             // jobName can be comming from the origHudsonConfig.
             if (cfg != null && cfg.getJobName() != null) {
