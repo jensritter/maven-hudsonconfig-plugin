@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="1.3.8-dev-20090210" sequence="0" timestamp="1250689434000" analysisTimestamp="1250689452665" release="">
+  <Project filename="&lt;&lt;unnamed project&gt;&gt;" projectName="maven-hudsonconfig-plugin">
+    <Jar>/media/data/eclipse/maven-hudsonconfig-plugin/target/maven-hudsonconfig-plugin-0.1-SNAPSHOT.jar</Jar>
+    <SrcDir>/media/data/eclipse/maven-hudsonconfig-plugin/src/main/java</SrcDir>
+    <SuppressionFilter>
+      <LastVersion value="-1" relOp="NEQ"/>
+    </SuppressionFilter>
+  </Project>
+  <BugInstance type="UWF_UNWRITTEN_FIELD" priority="2" abbrev="UwF" category="CORRECTNESS">
+    <UserAnnotation designation="NOT_A_BUG"><![CDATA[plexus injection]]></UserAnnotation>
+    <Class classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" sourcefile="AbstractBaseJob.java" sourcepath="com/google/code/mavenhudsonconfigplugin/AbstractBaseJob.java"/>
+    </Class>
+    <Field classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" name="hudsonUrl" signature="Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" sourcefile="AbstractBaseJob.java" sourcepath="com/google/code/mavenhudsonconfigplugin/AbstractBaseJob.java"/>
+    </Field>
+    <SourceLine classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" start="58" end="58" startBytecode="55" endBytecode="55" sourcefile="AbstractBaseJob.java" sourcepath="com/google/code/mavenhudsonconfigplugin/AbstractBaseJob.java"/>
+  </BugInstance>
+  <BugInstance type="UWF_UNWRITTEN_FIELD" priority="2" abbrev="UwF" category="CORRECTNESS">
+    <UserAnnotation designation="NOT_A_BUG"><![CDATA[plexus injection]]></UserAnnotation>
+    <Class classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" sourcefile="AbstractBaseJob.java" sourcepath="com/google/code/mavenhudsonconfigplugin/AbstractBaseJob.java"/>
+    </Class>
+    <Field classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" name="jobName" signature="Ljava/lang/String;" isStatic="false">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" sourcefile="AbstractBaseJob.java" sourcepath="com/google/code/mavenhudsonconfigplugin/AbstractBaseJob.java"/>
+    </Field>
+    <SourceLine classname="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" start="84" end="84" startBytecode="362" endBytecode="362" sourcefile="AbstractBaseJob.java" sourcepath="com/google/code/mavenhudsonconfigplugin/AbstractBaseJob.java"/>
+  </BugInstance>
+  <BugInstance type="SBSC_USE_STRINGBUFFER_CONCATENATION" priority="2" abbrev="SBSC" category="PERFORMANCE">
+    <UserAnnotation/>
+    <Class classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" sourcefile="HudsonControl.java" sourcepath="com/google/code/mavenhudsonconfigplugin/intern/HudsonControl.java"/>
+    </Class>
+    <Method classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" name="postHttp" signature="(Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;)V" isStatic="false">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" start="135" end="159" startBytecode="0" endBytecode="511" sourcefile="HudsonControl.java" sourcepath="com/google/code/mavenhudsonconfigplugin/intern/HudsonControl.java"/>
+    </Method>
+    <SourceLine classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" start="139" end="139" startBytecode="47" endBytecode="47" sourcefile="HudsonControl.java" sourcepath="com/google/code/mavenhudsonconfigplugin/intern/HudsonControl.java"/>
+  </BugInstance>
+  <BugInstance type="SBSC_USE_STRINGBUFFER_CONCATENATION" priority="2" abbrev="SBSC" category="PERFORMANCE" last="0" removedByChange="true">
+    <UserAnnotation/>
+    <Class classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" sourcefile="HudsonControl.java" sourcepath="com/google/code/mavenhudsonconfigplugin/intern/HudsonControl.java"/>
+    </Class>
+    <Method classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" name="postHttp" signature="(Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;)V" isStatic="false">
+      <SourceLine classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" start="135" end="159" startBytecode="0" endBytecode="511" sourcefile="HudsonControl.java" sourcepath="com/google/code/mavenhudsonconfigplugin/intern/HudsonControl.java"/>
+    </Method>
+    <SourceLine classname="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" start="139" end="139" startBytecode="47" endBytecode="47" sourcefile="HudsonControl.java" sourcepath="com/google/code/mavenhudsonconfigplugin/intern/HudsonControl.java"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="25">
+    <MissingClass>javax.annotation.Nonnull</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.HttpClient</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.HttpException</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.HttpMethod</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.StatusLine</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.methods.GetMethod</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.methods.PostMethod</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.methods.RequestEntity</MissingClass>
+    <MissingClass>org.apache.commons.httpclient.methods.StringRequestEntity</MissingClass>
+    <MissingClass>org.apache.commons.logging.Log</MissingClass>
+    <MissingClass>org.apache.commons.logging.LogFactory</MissingClass>
+    <MissingClass>org.apache.maven.model.CiManagement</MissingClass>
+    <MissingClass>org.apache.maven.model.Scm</MissingClass>
+    <MissingClass>org.apache.maven.plugin.AbstractMojo</MissingClass>
+    <MissingClass>org.apache.maven.plugin.MojoExecutionException</MissingClass>
+    <MissingClass>org.apache.maven.plugin.MojoFailureException</MissingClass>
+    <MissingClass>org.apache.maven.plugin.logging.Log</MissingClass>
+    <MissingClass>org.apache.maven.project.MavenProject</MissingClass>
+    <MissingClass>org.jdom.Content</MissingClass>
+    <MissingClass>org.jdom.Document</MissingClass>
+    <MissingClass>org.jdom.Element</MissingClass>
+    <MissingClass>org.jdom.JDOMException</MissingClass>
+    <MissingClass>org.jdom.input.SAXBuilder</MissingClass>
+    <MissingClass>org.jdom.output.Format</MissingClass>
+    <MissingClass>org.jdom.output.XMLOutputter</MissingClass>
+  </Errors>
+  <FindBugsSummary timestamp="Wed, 19 Aug 2009 15:43:54 +0200" total_classes="8" referenced_classes="57" total_bugs="3" total_size="712" num_packages="2" vm_version="14.1-b02" cpu_seconds="32.67" clock_seconds="713.35" peak_mbytes="535.18" alloc_mbytes="1333.38" gc_seconds="0.41" priority_2="3">
+    <PackageStats package="com.google.code.mavenhudsonconfigplugin" total_bugs="2" total_types="5" total_size="221" priority_2="2">
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.AbstractBaseJob" sourceFile="AbstractBaseJob.java" interface="false" size="50" bugs="2" priority_2="2"/>
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.GenerateConfig" sourceFile="GenerateConfig.java" interface="false" size="122" bugs="0"/>
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.ListJobs" sourceFile="ListJobs.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.RunJob" sourceFile="RunJob.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.UpdateConfig" sourceFile="UpdateConfig.java" interface="false" size="22" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="com.google.code.mavenhudsonconfigplugin.intern" total_bugs="1" total_types="3" total_size="491" priority_2="1">
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig" sourceFile="HudsonConfig.java" interface="false" size="280" bugs="0"/>
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.intern.HudsonControl" sourceFile="HudsonControl.java" interface="false" size="150" bugs="1" priority_2="1"/>
+      <ClassStats class="com.google.code.mavenhudsonconfigplugin.intern.HudsonJob" sourceFile="HudsonJob.java" interface="false" size="61" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.LoadedFieldSetFactory" totalMilliseconds="10" invocations="436" avgMicrosecondsPerInvocation="23"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindFieldSelfAssignment" totalMilliseconds="10" invocations="32" avgMicrosecondsPerInvocation="315"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.VarArgsProblems" totalMilliseconds="10" invocations="32" avgMicrosecondsPerInvocation="320"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUnsatisfiedObligation" totalMilliseconds="10" invocations="32" avgMicrosecondsPerInvocation="323"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteUnconditionalParamDerefs" totalMilliseconds="10" invocations="32" avgMicrosecondsPerInvocation="333"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUnsyncGet" totalMilliseconds="10" invocations="32" avgMicrosecondsPerInvocation="337"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.WrongMapIterator" totalMilliseconds="11" invocations="32" avgMicrosecondsPerInvocation="343"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SynchronizeAndNullCheckField" totalMilliseconds="11" invocations="32" avgMicrosecondsPerInvocation="358"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteSuppressedWarnings" totalMilliseconds="11" invocations="132" avgMicrosecondsPerInvocation="90"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SerializableIdiom" totalMilliseconds="11" invocations="32" avgMicrosecondsPerInvocation="374"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DoInsideDoPrivileged" totalMilliseconds="12" invocations="32" avgMicrosecondsPerInvocation="377"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantPoolGenFactory" totalMilliseconds="12" invocations="32" avgMicrosecondsPerInvocation="387"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MutableStaticFields" totalMilliseconds="13" invocations="32" avgMicrosecondsPerInvocation="416"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDoubleCheck" totalMilliseconds="14" invocations="32" avgMicrosecondsPerInvocation="444"/>
+      <ClassProfile name="edu.umd.cs.findbugs.NonReportingDetectorToDetector2Adapter" totalMilliseconds="14" invocations="3028" avgMicrosecondsPerInvocation="4"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNonSerializableValuePassedToWriteObject" totalMilliseconds="15" invocations="32" avgMicrosecondsPerInvocation="486"/>
+      <ClassProfile name="edu.umd.cs.findbugs.DetectorToDetector2Adapter" totalMilliseconds="17" invocations="3652" avgMicrosecondsPerInvocation="4"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ObligationDataflowFactory" totalMilliseconds="18" invocations="92" avgMicrosecondsPerInvocation="201"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethodInvocations" totalMilliseconds="19" invocations="32" avgMicrosecondsPerInvocation="612"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ReverseDepthFirstSearchFactory" totalMilliseconds="20" invocations="436" avgMicrosecondsPerInvocation="46"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SynchronizeOnClassLiteralNotGetClass" totalMilliseconds="23" invocations="32" avgMicrosecondsPerInvocation="727"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteNonnullReturnValues" totalMilliseconds="26" invocations="32" avgMicrosecondsPerInvocation="827"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDerefsInvolvingNonShortCircuitEvaluation" totalMilliseconds="26" invocations="32" avgMicrosecondsPerInvocation="838"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.AppendingToAnObjectOutputStream" totalMilliseconds="27" invocations="32" avgMicrosecondsPerInvocation="845"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindFloatEquality" totalMilliseconds="27" invocations="32" avgMicrosecondsPerInvocation="848"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindBadForLoop" totalMilliseconds="28" invocations="32" avgMicrosecondsPerInvocation="897"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BadSyntaxForRegularExpression" totalMilliseconds="30" invocations="32" avgMicrosecondsPerInvocation="955"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FormatStringChecker" totalMilliseconds="31" invocations="32" avgMicrosecondsPerInvocation="977"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SynchronizationOnSharedBuiltinConstant" totalMilliseconds="31" invocations="32" avgMicrosecondsPerInvocation="996"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.InfiniteLoop" totalMilliseconds="32" invocations="32" avgMicrosecondsPerInvocation="1010"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.StreamResourceTracker" totalMilliseconds="32" invocations="8" avgMicrosecondsPerInvocation="4065"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SuspiciousThreadInterrupted" totalMilliseconds="32" invocations="32" avgMicrosecondsPerInvocation="1022"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MethodReturnCheck" totalMilliseconds="33" invocations="32" avgMicrosecondsPerInvocation="1055"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SynchronizingOnContentsOfFieldToProtectField" totalMilliseconds="34" invocations="32" avgMicrosecondsPerInvocation="1073"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDeadLocalStores" totalMilliseconds="36" invocations="32" avgMicrosecondsPerInvocation="1144"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.InfiniteRecursiveLoop" totalMilliseconds="37" invocations="32" avgMicrosecondsPerInvocation="1169"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CrossSiteScripting" totalMilliseconds="38" invocations="32" avgMicrosecondsPerInvocation="1208"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindHEmismatch" totalMilliseconds="39" invocations="32" avgMicrosecondsPerInvocation="1224"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RepeatedConditionals" totalMilliseconds="39" invocations="32" avgMicrosecondsPerInvocation="1240"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNonShortCircuit" totalMilliseconds="40" invocations="32" avgMicrosecondsPerInvocation="1262"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUnrelatedTypesInGenericContainer" totalMilliseconds="42" invocations="32" avgMicrosecondsPerInvocation="1321"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="42" invocations="32" avgMicrosecondsPerInvocation="1338"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison" totalMilliseconds="45" invocations="32" avgMicrosecondsPerInvocation="1422"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.EqualsOperandShouldHaveClassCompatibleWithThis" totalMilliseconds="46" invocations="132" avgMicrosecondsPerInvocation="350"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RuntimeExceptionCapture" totalMilliseconds="47" invocations="32" avgMicrosecondsPerInvocation="1470"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DuplicateBranches" totalMilliseconds="48" invocations="32" avgMicrosecondsPerInvocation="1506"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CallToUnsupportedMethod" totalMilliseconds="48" invocations="32" avgMicrosecondsPerInvocation="1518"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="48" invocations="228" avgMicrosecondsPerInvocation="213"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindPuzzlers" totalMilliseconds="49" invocations="32" avgMicrosecondsPerInvocation="1546"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="51" invocations="32" avgMicrosecondsPerInvocation="1598"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BadResultSetAccess" totalMilliseconds="51" invocations="32" avgMicrosecondsPerInvocation="1599"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindSqlInjection" totalMilliseconds="56" invocations="32" avgMicrosecondsPerInvocation="1773"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="59" invocations="36" avgMicrosecondsPerInvocation="1663"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.UnreadFields" totalMilliseconds="60" invocations="32" avgMicrosecondsPerInvocation="1890"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindInconsistentSync2" totalMilliseconds="65" invocations="32" avgMicrosecondsPerInvocation="2050"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="68" invocations="260" avgMicrosecondsPerInvocation="262"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="69" invocations="1276" avgMicrosecondsPerInvocation="54"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethods" totalMilliseconds="70" invocations="32" avgMicrosecondsPerInvocation="2208"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReflectiveClasses" totalMilliseconds="72" invocations="132" avgMicrosecondsPerInvocation="549"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase" totalMilliseconds="73" invocations="9990" avgMicrosecondsPerInvocation="7"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref" totalMilliseconds="76" invocations="32" avgMicrosecondsPerInvocation="2399"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.DepthFirstSearchFactory" totalMilliseconds="79" invocations="580" avgMicrosecondsPerInvocation="137"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindSelfComparison" totalMilliseconds="85" invocations="32" avgMicrosecondsPerInvocation="2662"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ReturnPathTypeDataflowFactory" totalMilliseconds="87" invocations="260" avgMicrosecondsPerInvocation="335"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.LiveLocalStoreDataflowFactory" totalMilliseconds="88" invocations="436" avgMicrosecondsPerInvocation="202"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SwitchFallthrough" totalMilliseconds="91" invocations="32" avgMicrosecondsPerInvocation="2867"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindOpenStream" totalMilliseconds="114" invocations="32" avgMicrosecondsPerInvocation="3588"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.obl.ObligationAnalysis" totalMilliseconds="122" invocations="92" avgMicrosecondsPerInvocation="1326"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="123" invocations="132" avgMicrosecondsPerInvocation="937"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref$CheckCallSitesAndReturnInstructions" totalMilliseconds="141" invocations="436" avgMicrosecondsPerInvocation="323"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.impl.ZipCodeBaseFactory" totalMilliseconds="145" invocations="44" avgMicrosecondsPerInvocation="3300"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="146" invocations="436" avgMicrosecondsPerInvocation="336"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.URLProblems" totalMilliseconds="161" invocations="32" avgMicrosecondsPerInvocation="5057"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="166" invocations="436" avgMicrosecondsPerInvocation="380"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="229" invocations="132" avgMicrosecondsPerInvocation="1742"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="331" invocations="2896" avgMicrosecondsPerInvocation="114"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="389" invocations="132" avgMicrosecondsPerInvocation="2948"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="420" invocations="392" avgMicrosecondsPerInvocation="1072"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="471" invocations="436" avgMicrosecondsPerInvocation="1081"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="535" invocations="132" avgMicrosecondsPerInvocation="4056"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="688" invocations="436" avgMicrosecondsPerInvocation="1578"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="801" invocations="436" avgMicrosecondsPerInvocation="1838"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="811" invocations="436" avgMicrosecondsPerInvocation="1860"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="820" invocations="580" avgMicrosecondsPerInvocation="1414"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="834" invocations="1264" avgMicrosecondsPerInvocation="660"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="1055" invocations="436" avgMicrosecondsPerInvocation="2420"/>
+      <ClassProfile name="edu.umd.cs.findbugs.FindBugs2" totalMilliseconds="1336" invocations="8" avgMicrosecondsPerInvocation="167006"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

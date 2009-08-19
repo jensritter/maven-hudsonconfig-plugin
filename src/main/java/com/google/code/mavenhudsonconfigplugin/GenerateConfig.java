@@ -15,7 +15,7 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonConfig;
 
 /**
  * 
- * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:generate
+ * mvn com.google.code:maven-hudsonconfig-plugin:0.1-SNAPSHOT:generate
  * 
  * @author Jens Ritter -jens.ritter.gmail.com-
  * 
@@ -184,6 +184,7 @@ public class GenerateConfig extends AbstractBaseJob {
         getLog().info(MYNAME + ": New config succesfull written to target/config.xml");
         getLog().info(MYNAME + ": ");
         getLog().info(MYNAME + ": Copy it to hudson");
+
     }
     
     
@@ -191,18 +192,29 @@ public class GenerateConfig extends AbstractBaseJob {
     public String buildConfig(final HudsonConfig value) throws MojoExecutionException {
         HudsonConfig cfg = value;
         if (cfg == null) {
-            SAXBuilder builder = new SAXBuilder();
+            final SAXBuilder builder = new SAXBuilder();
             Document doc = null;
+            FileInputStream in = null;
             try {
                 if (templateFile == null) {
                     doc = builder.build(GenerateConfig.class.getResourceAsStream("/config.xml"));
                 } else {
-                    doc = builder.build(new FileInputStream(templateFile));
+                    in = new FileInputStream(templateFile);
+                    doc = builder.build(in);
+                    in.close();
                 }
             } catch (IOException e) {
                 throw new MojoExecutionException(MYNAME + ": can't read template : " + e.getMessage());
             } catch (JDOMException e) {
                 throw new MojoExecutionException(MYNAME + ": can't read template: " + e.getMessage());
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        getLog().info("Ignored : " + e.getMessage());
+                    }
+                }
             }
             cfg = HudsonConfig.parseDocument(jobName_used,doc);
         }
@@ -220,13 +232,13 @@ public class GenerateConfig extends AbstractBaseJob {
         
         
 
-        File f = outputDirectory;
+        final File f = outputDirectory;
         if (!f.exists()) {
             if (!f.mkdirs()) {
                 throw new MojoExecutionException("Can't create directory " + f.toString());
             }
         }
-        File conf = new File(f, "config.xml");
+        final File conf = new File(f, "config.xml");
         FileWriter w = null;
         try {
             w = new FileWriter(conf);

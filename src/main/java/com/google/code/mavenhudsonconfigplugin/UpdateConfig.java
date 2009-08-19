@@ -12,7 +12,7 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
 
 /**
  * 
- * mvn com.google.code:maven-hudsonconfig-plugin:1.0-SNAPSHOT:update
+ * mvn com.google.code:maven-hudsonconfig-plugin:0.1-SNAPSHOT:update
  * 
  * @author Jens Ritter -jens.ritter.gmail.com-
  * 
