@@ -12,21 +12,32 @@ public class HudsonConfig {
 
     private Document doc;
     private Element root;
+    
+    private String jobname;
 
     private HudsonConfig() {
 
     }
 
-    public static HudsonConfig parseDocument(Document doc) {
+    public static HudsonConfig parseDocument(String jobName, Document doc) {
         HudsonConfig cfg = new HudsonConfig();
         cfg.doc = doc;
         cfg.root = doc.getRootElement();
+        cfg.jobname = jobName;
         return cfg;
     }
 
     public String getXml() {
         XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
         return out.outputString(doc);
+    }
+    
+    public String getJobName() {
+        return jobname;
+    }
+    
+    public void setJobName(String value) {
+        jobname = value;
     }
     // ---------
 
