@@ -8,7 +8,6 @@ import org.jdom.JDOMException;
 
 import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
 
-
 /**
  * 
  * mvn com.google.code:maven-hudsonconfig-plugin:0.1-SNAPSHOT:list
@@ -18,7 +17,7 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  * @goal list
  * @requiresProject true
  */
-public class ListJobs extends AbstractBaseJob{
+public class ListJob extends AbstractBaseJob{
     
     public void execute() throws MojoExecutionException, MojoFailureException {
         defaultValues(null);

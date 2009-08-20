@@ -52,16 +52,15 @@ public class GenerateConfig extends AbstractBaseJob {
      * @parameter expression="${project.build.directory}"
      * @required
      */
-    private File outputDirectory;
-    protected File outputDirectory_used;
+    protected File outputDirectory;
+
 
     /**
      * Location of template ( if not set - MY default will be used )
      * 
      * @parameter
      */
-    private File templateFile;
-    protected File templateFile_used;
+    protected File templateFile;
     
     /**
      * Setting default "goals" for Hudsonbuild
@@ -77,6 +76,7 @@ public class GenerateConfig extends AbstractBaseJob {
 
     @Override
     protected void defaultValues(HudsonConfig cfg) throws MojoExecutionException {
+    	super.defaultValues(cfg);
         getLog().debug("BaseGenerateConfig.defaultValues:");
         
         getLog().debug("keepBuildDays : ");
@@ -231,7 +231,15 @@ public class GenerateConfig extends AbstractBaseJob {
         cfg.setGoals(goals_used);
         
         
+        writeToFile(cfg.getXml());
 
+        
+
+        return cfg.getXml();
+
+    }
+    
+    public void writeToFile(String content) throws MojoExecutionException {
         final File f = outputDirectory;
         if (!f.exists()) {
             if (!f.mkdirs()) {
@@ -243,7 +251,7 @@ public class GenerateConfig extends AbstractBaseJob {
         try {
             w = new FileWriter(conf);
 
-            w.write(cfg.getXml());
+            w.write(content);
         } catch (IOException e) {
             throw new MojoExecutionException("Error creating file " + conf, e);
         } finally {
@@ -255,9 +263,5 @@ public class GenerateConfig extends AbstractBaseJob {
                 }
             }
         }
-        
-
-        return cfg.getXml();
-
     }
 }
