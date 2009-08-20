@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+	<description>DESCRIPTION</description>
+
+    <scm>
+        <connection>scm:svn:http://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://code.google.com/p/maven-hudsonconfig-plugin/source/browse/</url>
+    </scm>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.google.code</groupId>
+        <artifactId>maven-hudsonconfig-plugin</artifactId>
+        <configuration>
+        	<hudsonUrl>http://www.google.de/hudson/jobs/google</hudsonUrl>
+			<jobName>google</jobName>
+        	<project implementation="com.google.code.mavenhudsonconfigplugin.MyProjectStubValues"/>
+        	
+        	
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
