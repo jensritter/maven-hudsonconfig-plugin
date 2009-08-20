@@ -13,88 +13,84 @@ import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 import org.codehaus.plexus.util.ReaderFactory;
 
 public class MyProjectStubSimple extends MavenProjectStub {
-	private CiManagement ci;
-	private Scm scm; 
-	private Build build;
-	
-	public MyProjectStubSimple()
-    {
-		loadData("src/test/resources/simple.xml");
+    private CiManagement ci;
+    private Scm scm; 
+    private Build build;
+
+    public MyProjectStubSimple() {
+        loadData("src/test/resources/simple.xml");
     }
-	
-	@SuppressWarnings("unchecked")
-	protected void loadData(String path) {
-		 MavenXpp3Reader pomReader = new MavenXpp3Reader();
-	        Model model;
-	        try
-	        {
-	            model = pomReader.read( ReaderFactory.newXmlReader( new File( getBasedir(),path ) ) );
-	            setModel( model );
-	        }
-	        catch ( Exception e )
-	        {
-	            throw new RuntimeException( e );
-	        }
 
-	        setGroupId( model.getGroupId() );
-	        setArtifactId( model.getArtifactId() );
-	        setVersion( model.getVersion() );
-	        setName( model.getName() );
-	        setUrl( model.getUrl() );
-	        setPackaging( model.getPackaging() );
-	        setCiManagement(model.getCiManagement());
-	        setScm(model.getScm());
-	        setDescription(model.getDescription());
+    @SuppressWarnings("unchecked")
+    protected void loadData(String path) {
+        MavenXpp3Reader pomReader = new MavenXpp3Reader();
+        Model model;
+        try {
+            model = pomReader.read(ReaderFactory.newXmlReader(new File(getBasedir(),path)));
+            setModel(model);
+        } catch(Exception e) {
+            throw new RuntimeException(e );
+        }
 
-	        Build build = new Build();
-	        build.setFinalName( model.getArtifactId() );
-	        build.setDirectory( getBasedir() + "/target" );
-	        build.setSourceDirectory( getBasedir() + "/src/main/java" );
-	        build.setOutputDirectory( getBasedir() + "/target/classes" );
-	        build.setTestSourceDirectory( getBasedir() + "/src/test/java" );
-	        build.setTestOutputDirectory( getBasedir() + "/target/test-classes" );
+        setGroupId(model.getGroupId() );
+        setArtifactId(model.getArtifactId() );
+        setVersion(model.getVersion() );
+        setName(model.getName() );
+        setUrl(model.getUrl() );
+        setPackaging(model.getPackaging() );
+        setCiManagement(model.getCiManagement());
+        setScm(model.getScm());
+        setDescription(model.getDescription());
 
-	        setBuild( build );
+        Build buildTemp = new Build();
+        buildTemp.setFinalName(model.getArtifactId() );
+        buildTemp.setDirectory(getBasedir() + "/target" );
+        buildTemp.setSourceDirectory(getBasedir() + "/src/main/java" );
+        buildTemp.setOutputDirectory(getBasedir() + "/target/classes" );
+        buildTemp.setTestSourceDirectory(getBasedir() + "/src/test/java" );
+        buildTemp.setTestOutputDirectory(getBasedir() + "/target/test-classes" );
 
-	        List compileSourceRoots = new ArrayList();
-	        compileSourceRoots.add( getBasedir() + "/src/main/java" );
-	        setCompileSourceRoots( compileSourceRoots );
+        setBuild(buildTemp );
 
-	        List testCompileSourceRoots = new ArrayList();
-	        testCompileSourceRoots.add( getBasedir() + "/src/test/java" );
-	        setTestCompileSourceRoots( testCompileSourceRoots );
+        List compileSourceRoots = new ArrayList();
+        compileSourceRoots.add(getBasedir() + "/src/main/java" );
+        setCompileSourceRoots(compileSourceRoots );
 
-	}
-	
-	@Override
-	public void setCiManagement(CiManagement value) {
-		this.ci = value;
-	}
-	
-	@Override
-	public CiManagement getCiManagement() {
-		return ci;
-	}
-	
-	@Override
-	public void setScm(Scm value) {
-		this.scm = value;
-	}
-	
-	@Override
-	public Scm getScm() {
-		return scm;
-	}
+        List testCompileSourceRoots = new ArrayList();
+        testCompileSourceRoots.add(getBasedir() + "/src/test/java" );
+        setTestCompileSourceRoots(testCompileSourceRoots );
 
-	@Override
-	public Build getBuild() {
-		return build;
-	}
+    }
 
-	@Override
-	public void setBuild(Build build) {
-		this.build = build;
-	}
+    @Override
+    public void setCiManagement(CiManagement value) {
+        this.ci = value;
+    }
+
+    @Override
+    public CiManagement getCiManagement() {
+        return ci;
+    }
+
+    @Override
+    public void setScm(Scm value) {
+        this.scm = value;
+    }
+
+    @Override
+    public Scm getScm() {
+        return scm;
+    }
+
+    @Override
+    public Build getBuild() {
+        return build;
+    }
+
+    @Override
+    public void setBuild(Build build) {
+        this.build = build;
+    }
 
 
 }

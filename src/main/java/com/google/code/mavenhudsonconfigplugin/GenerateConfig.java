@@ -76,7 +76,7 @@ public class GenerateConfig extends AbstractBaseJob {
 
     @Override
     protected void defaultValues(HudsonConfig cfg) throws MojoExecutionException {
-    	super.defaultValues(cfg);
+        super.defaultValues(cfg);
         getLog().debug("BaseGenerateConfig.defaultValues:");
         
         getLog().debug("keepBuildDays : ");

@@ -19,21 +19,21 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
  */
 public class GetConfigJob extends GenerateConfig {
 
-	public void execute() throws MojoExecutionException, MojoFailureException {
-		defaultValues(null);
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        defaultValues(null);
         HudsonControl hudson = new HudsonControl(hudsonUrl_used);
         try {
-			writeToFile(hudson.getConfigAsXml(jobName_used));
-			getLog().info("");
-			getLog().info("");
-			getLog().info("File written to " + outputDirectory.toString() + File.separator + "config.xml");
-			getLog().info("");
-			getLog().info("");
-			getLog().info("");
-			getLog().info("");
-		} catch (IOException e) {
-			 throw new MojoExecutionException(e.getMessage());
-		}
-	}
+            writeToFile(hudson.getConfigAsXml(jobName_used));
+            getLog().info("");
+            getLog().info("");
+            getLog().info("File written to " + outputDirectory.toString() + File.separator + "config.xml");
+            getLog().info("");
+            getLog().info("");
+            getLog().info("");
+            getLog().info("");
+        } catch (IOException e) {
+            throw new MojoExecutionException(e.getMessage());
+        }
+    }
 
 }
