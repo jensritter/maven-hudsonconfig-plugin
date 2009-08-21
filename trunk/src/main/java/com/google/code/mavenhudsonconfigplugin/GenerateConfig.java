@@ -189,7 +189,7 @@ public class GenerateConfig extends AbstractBaseJob {
     
     
     
-    public String buildConfig(final HudsonConfig value) throws MojoExecutionException {
+    public HudsonConfig buildConfig(final HudsonConfig value) throws MojoExecutionException {
         HudsonConfig cfg = value;
         if (cfg == null) {
             final SAXBuilder builder = new SAXBuilder();
@@ -231,12 +231,13 @@ public class GenerateConfig extends AbstractBaseJob {
         cfg.setGoals(goals_used);
         
         
+        return cfg;
+    }
+    
+    public String buildConfigAsString(HudsonConfig value) throws MojoExecutionException {
+        final HudsonConfig cfg = buildConfig(value);
         writeToFile(cfg.getXml());
-
-        
-
         return cfg.getXml();
-
     }
     
     public void writeToFile(String content) throws MojoExecutionException {
