@@ -14,7 +14,7 @@ public class TestHelpJobTest extends AbstractBaseJobTest {
      * @throws Exception the exception
      */
     public void testExecute() throws Exception {
-        ListJob mojo = (ListJob) loadMojo(SIMPLE,"help");
+        HelpJob mojo = (HelpJob) loadMojo(SIMPLE,"help");
         mojo.execute();
         assertTrue(true);
     }
