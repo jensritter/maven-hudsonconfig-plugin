@@ -20,19 +20,40 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
+/**
+ * The Class HudsonControl.
+ * 
+ * @author Jens Ritter
+ */
 public class HudsonControl {
     
     
+    /** The logger. */
     private Log logger = LogFactory.getLog(HudsonControl.class);
     
+    /** The url. */
     private String url = "";
+    
+    /** The username. */
     private String username = null;
+    
+    /** The password. */
     private String password = null;
+    
+    /** The need login. */
     private boolean needLogin = false;
 
+    /** The sax. */
     private SAXBuilder sax;
     
+    /** The client. */
     HttpClient client;
+    
+    /**
+     * Instantiates a new hudson control.
+     * 
+     * @param value the value
+     */
     public HudsonControl(String value) {
         url = value;
         needLogin=false;
@@ -40,14 +61,49 @@ public class HudsonControl {
         client = new HttpClient();
     }
 
+    /**
+     * Gets the command.
+     * 
+     * @param value the value
+     * 
+     * @return the command
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     private Element getCommand(String value) throws HttpException, IOException, JDOMException {
         return getCommand(value,true);
     }
 
+    /**
+     * Gets the command.
+     * 
+     * @param value the value
+     * @param parsePath the parse path
+     * 
+     * @return the command
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     private Element getCommand(String value,boolean parsePath) throws HttpException, IOException, JDOMException {
         return getHttpPostParsed(value,parsePath).getRootElement();
     }
     
+    /**
+     * Gets the http post parsed.
+     * 
+     * @param value the value
+     * @param parsePath the parse path
+     * 
+     * @return the http post parsed
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     private Document getHttpPostParsed(String value,boolean parsePath) throws HttpException, IOException, JDOMException {
         String conurl = null;
         if (parsePath) {
@@ -75,6 +131,16 @@ public class HudsonControl {
         }
     }
 
+    /**
+     * Post http.
+     * 
+     * @param value the value
+     * @param param the param
+     * @param content the content
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private void postHttp(String value, Map<String,String> param, String content) throws HttpException, IOException {
         StringBuilder query = new StringBuilder();
         if (param != null) {
@@ -101,6 +167,16 @@ public class HudsonControl {
             method.releaseConnection();
         }
     }
+    
+    /**
+     * Gets the http get plain.
+     * 
+     * @param value the value
+     * 
+     * @return the http get plain
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private String getHttpGetPlain(String value) throws IOException {
         GetMethod method = new GetMethod(url + "/"  + value);
         try {
@@ -118,6 +194,16 @@ public class HudsonControl {
         }
     }
     
+    /**
+     * Gets the http get.
+     * 
+     * @param value the value
+     * 
+     * @return the http get
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     private Document getHttpGet(String value) throws IOException, JDOMException {
         GetMethod method = new GetMethod(url + "/"  + value);
         try {
@@ -138,13 +224,22 @@ public class HudsonControl {
         }
     }
     
+    /**
+     * Post http plain.
+     * 
+     * @param value the value
+     * 
+     * @return the string
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     private String postHttpPlain(String value) throws IOException {
         PostMethod method = new PostMethod(url + "/"  + value);
         try {
             // Execute the method.
             int statusCode = client.executeMethod(method);
             if (statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
-                // all
+                logger.info("Ignored " + HttpStatus.SC_MOVED_TEMPORARILY);
             } else {
                 if (statusCode != HttpStatus.SC_OK) {
                     logger.fatal("Method failed: " + method.getStatusLine());
@@ -159,6 +254,13 @@ public class HudsonControl {
         }
     }
 
+    /**
+     * Xml2 hudson job.
+     * 
+     * @param jobXml the job xml
+     * 
+     * @return the hudson job
+     */
     private HudsonJob xml2HudsonJob(Element jobXml) {
         HudsonJob job = new HudsonJob();
         job.setName(jobXml.getChildTextNormalize("name"));
@@ -169,6 +271,15 @@ public class HudsonControl {
 
 
 
+    /**
+     * Ping.
+     * 
+     * @return true, if successful
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     public boolean ping() throws HttpException, IOException, JDOMException {
         Element result = getCommand("api/xml");
         /*Format.getPrettyFormat();
@@ -183,6 +294,14 @@ public class HudsonControl {
 
 
 
+    /**
+     * Gets the jobs.
+     * 
+     * @return the jobs
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     @SuppressWarnings("unchecked")
     public List<HudsonJob> getJobs() throws IOException, JDOMException {
         Element response = getCommand("api/xml");
@@ -203,6 +322,17 @@ public class HudsonControl {
 
 
 
+    /**
+     * Gets the job.
+     * 
+     * @param projectname the projectname
+     * 
+     * @return the job
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     @SuppressWarnings("unchecked")
     public HudsonJob getjob(String projectname) throws HttpException, IOException, JDOMException {
         Element response = getCommand("api/xml");
@@ -222,10 +352,28 @@ public class HudsonControl {
         return null;
     }
 
+    /**
+     * Gets the config as xml.
+     * 
+     * @param projectname the projectname
+     * 
+     * @return the config as xml
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public String getConfigAsXml(String projectname) throws IOException {
         return getHttpGetPlain("job/" + projectname + "/config.xml");
     }
     
+    /**
+     * Creates the job.
+     * 
+     * @param name the name
+     * @param config the config
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void createJob(String name, String config) throws HttpException, IOException {
         // http://www.jens.org:8080/hudson/createItem
         // queryPara = name=JOBNAME
@@ -234,6 +382,13 @@ public class HudsonControl {
         postHttp("createItem", para, config);
     }
 
+    /**
+     * Delete job.
+     * 
+     * @param projectname the projectname
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void deleteJob(String projectname) throws IOException {
         //http://www.jens.org:8080/hudson/job/JUNITTEST/doDelete
         postHttpPlain("job/" + projectname + "/doDelete");
@@ -241,6 +396,14 @@ public class HudsonControl {
 
 
 
+    /**
+     * Gets the jobs as string.
+     * 
+     * @return the jobs as string
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     public List<String> getjobsAsString() throws IOException, JDOMException {
 
         ArrayList<String> result = new ArrayList<String>();
@@ -252,27 +415,68 @@ public class HudsonControl {
 
 
 
+    /**
+     * Run job.
+     * 
+     * @param projectname the projectname
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void runJob(String projectname) throws IOException {
         // http://www.jens.org:8080/hudson/job/MasterPom-1.0/build
         postHttpPlain("/job/" + projectname + "/build");
     }
     
+    /**
+     * Disable job.
+     * 
+     * @param projectname the projectname
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void disableJob(String projectname) throws IOException {
         // http://www.jens.org:8080/hudson/job/MasterPom-1.0/disable
         postHttpPlain("job/" + projectname + "/disable");
     }
     
+    /**
+     * Enable job.
+     * 
+     * @param projectname the projectname
+     * 
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void enableJob(String projectname) throws IOException {
         // http://www.jens.org:8080/hudson/job/MasterPom-1.0/enable
         postHttpPlain("job/" + projectname + "/enable");
     }
 
+    /**
+     * Gets the config.
+     * 
+     * @param projectname the projectname
+     * 
+     * @return the config
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JDOMException the JDOM exception
+     */
     public HudsonConfig getConfig(String projectname) throws HttpException, IOException, JDOMException {
         Document cfg = getHttpGet("job/" + projectname + "/config.xml");
         HudsonConfig config = HudsonConfig.parseDocument(projectname,cfg);
         return config;
     }
 
+    /**
+     * Save config.
+     * 
+     * @param name the name
+     * @param xml the xml
+     * 
+     * @throws HttpException the http exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void saveConfig(String name, String xml) throws HttpException, IOException {
         // http://www.jens.org:8080/hudson/job/Bugs/config.xml
         postHttp("job/" + name + "/config.xml", null, xml);
