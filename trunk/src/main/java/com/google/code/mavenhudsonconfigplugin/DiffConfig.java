@@ -28,18 +28,14 @@ public class DiffConfig extends GenerateConfig{
         
         HudsonControl ctl = new HudsonControl(hudsonUrl_used);
        
-        HudsonConfig cfg;
+        HudsonConfig cfg = new HudsonConfig();
         try {
             cfg = ctl.getConfig(jobName_used);
-            
-            
         } catch (HttpException e) {
-            throw new MojoExecutionException(e.getMessage());
+            getLog().warn("could not connect to Hudson : " + e.getMessage());
         } catch (IOException e) {
-            //e.printStackTrace();
-            throw new MojoExecutionException(e.getMessage());
+            getLog().warn("could not connect to Hudson : " + e.getMessage());
         } catch (JDOMException e) {
-            //e.printStackTrace();
             throw new MojoExecutionException(e.getMessage());
         }
         

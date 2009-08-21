@@ -1,99 +1,35 @@
 package com.google.code.mavenhudsonconfigplugin.intern;
 
-/**
- * The Class HudsonJob.
- * 
- * @author Jens Ritter
- */
 public class HudsonJob {
 
-    /** The name. */
     String name;
-    
-    /** The url. */
     String url;
-    
-    /** The color. */
     String color;
-    
-    /** The enabled. */
     boolean enabled;
-    
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
     public String getName() {
         return name;
     }
-    
-    /**
-     * Sets the name.
-     * 
-     * @param name the new name
-     */
     public void setName(String name) {
         this.name = name;
     }
-    
-    /**
-     * Gets the url.
-     * 
-     * @return the url
-     */
     public String getUrl() {
         return url;
     }
-    
-    /**
-     * Sets the url.
-     * 
-     * @param url the new url
-     */
     public void setUrl(String url) {
         this.url = url;
     }
-    
-    /**
-     * Gets the color.
-     * 
-     * @return the color
-     */
     public String getColor() {
         return color;
     }
-    
-    /**
-     * Sets the color.
-     * 
-     * @param color the new color
-     */
     public void setColor(String color) {
         this.color = color;
     }
-    
-    /**
-     * Checks if is enabled.
-     * 
-     * @return true, if is enabled
-     */
     public boolean isEnabled() {
         return enabled;
     }
-    
-    /**
-     * Sets the enabled.
-     * 
-     * @param enabled the new enabled
-     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-    
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -104,10 +40,6 @@ public class HudsonJob {
         result = prime * result + ((url == null) ? 0 : url.hashCode());
         return result;
     }
-    
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
