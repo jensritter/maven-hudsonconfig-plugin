@@ -12,14 +12,14 @@ import com.google.code.mavenhudsonconfigplugin.intern.HudsonControl;
 
 /**
  * 
- * mvn com.google.code:maven-hudsonconfig-plugin:0.1-SNAPSHOT:update
+ * mvn com.google.code:maven-hudsonconfig-plugin:0.1-SNAPSHOT:diff
  * 
  * @author Jens Ritter -jens.ritter.gmail.com-
  * 
- * @goal update
+ * @goal diff
  * @requiresProject true
  */
-public class UpdateConfig extends GenerateConfig{
+public class DiffConfig extends GenerateConfig{
 
     
     @Override
@@ -31,10 +31,27 @@ public class UpdateConfig extends GenerateConfig{
         try {
             HudsonConfig cfg = ctl.getConfig(jobName_used);
             defaultValues(cfg);
+            final HudsonConfig newCfg = buildConfig(cfg);
+            System.out.println("Description:");
+            System.out.println("    OLD:" + cfg.getDescription());
+            System.out.println("    NEW:" +newCfg.getDescription());
             
-            String content = buildConfigAsString(cfg);
-            ctl.saveConfig(jobName_used, content);
-            getLog().info("Hudson config Updated");
+            System.out.println("LogRotator-NumToKeep:");
+            System.out.println("    OLD:" + cfg.getLogRotatorNumToKeep());
+            System.out.println("    NEW:" + newCfg.getLogRotatorNumToKeep());
+            
+            System.out.println("Goals:");
+            System.out.println("    OLD:" + cfg.getGoals());
+            System.out.println("    NEW:" + newCfg.getGoals());
+            
+            System.out.println("SVN:");
+            System.out.println("    OLD:" + cfg.getSvnRemote(0));
+            System.out.println("    NEW:" + newCfg.getSvnRemote(0));
+            
+            System.out.println("SVN-LocalPart:");
+            System.out.println("    OLD:" + cfg.getSvnLocal(0));
+            System.out.println("    NEW:" + newCfg.getSvnLocal(0));
+            
         } catch (HttpException e) {
             e.printStackTrace();
             throw new MojoExecutionException(e.getMessage());
