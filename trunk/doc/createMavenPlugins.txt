@@ -1,0 +1,6 @@
+mvn archetype:create \
+  -DgroupId=org.jens \
+  -DartifactId=maven-hudsonconfig-plugin \
+  -DarchetypeGroupId=org.apache.maven.archetypes \
+  -DarchetypeArtifactId=maven-archetype-mojo
+
