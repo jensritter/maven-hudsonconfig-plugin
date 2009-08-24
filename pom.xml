@@ -2,7 +2,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
 >
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.google.code</groupId>
+    <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-hudsonconfig-plugin</artifactId>
     <packaging>maven-plugin</packaging>
     <version>0.1-SNAPSHOT</version>
@@ -11,7 +11,6 @@
     <description>
         Hudson currently don't read informations from a maven pom.xml file. 
         This plugin pushes the information from the pom to Hudson.
-        Currently only the config is written into target/config.xml
     </description>
     
     <ciManagement>
