@@ -5,9 +5,14 @@
 
     <scm>
         <connection>scm:svn:http://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/</connection>
-        <developerConnection>scm:svn:https://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/</developerConnection>
+        <developerConnection>scm:svn:https://maven-hudsonconfig-plugin.googlecode.com/svn/trunk/222222222222222</developerConnection>
         <url>http://code.google.com/p/maven-hudsonconfig-plugin/source/browse/</url>
     </scm>
+    
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://www.jens.org:8080/hudson/job/maven-hudsonconfig-plugin</url>
+    </ciManagement>
 
   <build>
     <plugins>
@@ -15,9 +20,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>hudson</artifactId>
         <configuration>
-        	<hudsonUrl>http://www.google.de/hudson/jobs/google</hudsonUrl>
-			<jobName>google</jobName>
-        	<project implementation="com.google.code.mavenhudsonconfigplugin.MyProjectStubValues"/>
+
+        	<project implementation="com.google.code.mavenhudsonconfigplugin.MyProjectStubOtherScm"/>
         	
         	
         </configuration>
