@@ -16,6 +16,9 @@ public class AbstractBaseJobTest extends AbstractMojoTestCase {
     
     /** The Constant VALUES. */
     public static final String VALUES="src/test/resources/values.xml";
+    
+    /** The Constant OTHER. */
+    public static final String OTHER="src/test/resources/other.xml";
 
     /**
      * Load mojo.
