@@ -13,7 +13,7 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>hudson</artifactId>
+        <artifactId>maven-hudsonconfig-plugin</artifactId>
         <configuration>
         	<hudsonUrl>http://www.google.de/hudson/jobs/google</hudsonUrl>
 			<jobName>google</jobName>
